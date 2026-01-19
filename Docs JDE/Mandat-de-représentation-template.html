@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Mandat de représentation – {{ mandat.reference }}</title>
+  <style>
+    /* Compatible CSS (wkhtmltopdf / puppeteer / chromium) — no flex/grid */
+    @page{ size:A4; margin:18mm; }
+
+    body{
+      margin:0;
+      color:#000;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size:15px;
+      line-height:1.55;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto;
+    }
+
+    /* ---------- Header (table-based) ---------- */
+    .header{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:2mm;
+      margin-bottom:14mm;
+    }
+    .header td{ vertical-align:middle; }
+
+    .logo-cell{ width:78mm; }
+    .logo-box{
+      width:78mm;
+      height:54mm;
+      background:#d9ddd6; /* same light grey/green */
+      text-align:center;
+      padding:4mm;
+      box-sizing:border-box;
+    }
+    .logo-box img{
+      max-width:100%;
+      max-height:100%;
+      display:inline-block;
+    }
+
+    .title-cell{ padding-left:14mm; }
+    h1{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-weight:600;
+      font-size:40px;
+      letter-spacing:.2px;
+    }
+
+    /* ---------- Spacing blocks ---------- */
+    p{ margin:0 0 4mm 0; }
+    .block{ margin-top:10mm; margin-bottom:10mm; }
+
+    .date-lines{ margin:8mm 0 10mm 0; }
+    .date-lines p{ margin:0 0 12mm 0; }
+
+    /* ---------- Signatures (table-based + no break) ---------- */
+    .sign-date{ margin-top:14mm; margin-bottom:6mm; }
+
+    .sign-table{
+      width:100%;
+      border-collapse:collapse;
+      page-break-inside:avoid;
+    }
+    .sign-table td{
+      width:50%;
+      vertical-align:top;
+    }
+    .sign-left{ padding-right:14mm; }
+    .sign-right{ padding-left:14mm; }
+
+    .sign-label{ margin:0 0 6mm 0; }
+    .sign-name{ margin:0 0 6mm 0; }
+
+    /* anchor zone for e-sign (keeps space without pushing to next page) */
+    .signature-anchor{
+      height:22mm;
+    }
+
+    /* company stamp space */
+    .stamp{
+      height:28mm;
+    }
+    .stamp img{
+      max-width:70mm;
+      max-height:28mm;
+      display:inline-block;
+    }
+
+    /* Avoid accidental page split right before signatures */
+    .avoid-break{ page-break-inside:avoid; }
+
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <table class="header">
+      <tr>
+        <td class="logo-cell">
+          <div class="logo-box">
+            <!-- <img src="{{ company.logo_url }}" alt="Logo"> -->
+          </div>
+        </td>
+        <td class="title-cell">
+          <h1>Mandat de représentation</h1>
+        </td>
+      </tr>
+    </table>
+
+    <p>Je soussigné : {{ client.title }} {{ client.full_name }}</p>
+    <p>Agissant en qualité de : {{ client.role }} de l’habitation située Au {{ client.address }}</p>
+
+    <p class="block">
+      Déclare par la présente donnée pouvoir au : Cabinet SARL Jacky Duquesne 38 rue de la Paix 59490 SOMAIN,
+      pour régler le dommage que nous subissons avec les compagnies d’assurances, afin de percevoir le montant des indemnités
+      pouvant me revenir à raison du sinistre survenu.
+    </p>
+
+    <div class="date-lines avoid-break">
+      <p>Le :</p>
+      <p>A :</p>
+    </div>
+
+    <p class="block">
+      À cet effet, nommer tous les experts, assister à toutes les expertises ou tierce expertise, approuver ou contester le montant,
+      compromettre, transiger, poursuivre, donner bonne et valable quittance de toutes sommes reçues, donner décharge, accorder
+      toutes autorisations, consentir toutes mainlevées, subrogé dans tous mes droits, action et recours contre les auteurs connus ou
+      présumés responsables, signer tous les avenants de résiliation et généralement faire le nécessaire relativement aux dit sinistre,
+      promettant de le ratifier en tant que de besoin.
+    </p>
+
+    <p class="sign-date">Le :</p>
+
+    <table class="sign-table">
+      <tr>
+        <td class="sign-left">
+          <p class="sign-label">« Bon pour pouvoir »</p>
+          <p class="sign-name">(Nom et Prénom) {{ client.full_name }}</p>
+
+          <div class="signature-anchor"
+               id="signature-client"
+               data-signer-role="client"
+               data-signer-email="{{ client.email }}">
+            <!-- SIGN_HERE_CLIENT -->
+          </div>
+        </td>
+
+        <td class="sign-right">
+          <p class="sign-label">« Bon pour acceptation du pouvoir »</p>
+          <p class="sign-name">SARL Jacky Duquesne Expertises</p>
+
+          <div class="stamp">
+            <!-- <img src="{{ company.stamp_url }}" alt="Cachet"> -->
+          </div>
+        </td>
+      </tr>
+    </table>
+
+  </div>
+</body>
+</html>

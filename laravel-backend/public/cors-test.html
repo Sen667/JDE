@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CORS Test</title>
+</head>
+<body>
+    <h1>CORS Test Page</h1>
+    <button id="testBtn">Test CORS Request</button>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('testBtn').onclick = async () => {
+            const result = document.getElementById('result');
+
+            try {
+                // Test the simple test route
+                const response = await fetch('http://127.0.0.1:8000/api/test', {
+                    method: 'GET',
+                    headers: {
+                        'Origin': 'http://localhost:8080'
+                    }
+                });
+
+                result.innerHTML = `
+                    <h2>Test Route (GET)</h2>
+                    <p>Status: ${response.status}</p>
+                    <p>Status Text: ${response.statusText}</p>
+                    <p>CORS Headers:</p>
+                    <ul>
+                        ${[...response.headers.keys()].filter(k => k.toLowerCase().includes('access')).map(k =>
+                            `<li>${k}: ${response.headers.get(k)}</li>`
+                        ).join('')}
+                        ${response.headers.get('access-control-allow-origin') ? '' : '<li style="color: red;">❌ No Access-Control-Allow-Origin header</li>'}
+                    </ul>
+                    <p>Response: ${await response.text()}</p>
+                `;
+
+                // Test OPTIONS if browser supports it
+                if ('OPTIONS' in fetch) {
+                    try {
+                        const optionsResponse = await fetch('http://127.0.0.1:8000/api/auth/login', {
+                            method: 'OPTIONS',
+                            headers: {
+                                'Access-Control-Request-Method': 'POST',
+                                'Origin': 'http://localhost:8080'
+                            }
+                        });
+
+                        result.innerHTML += `
+                            <h2>Options Request (OPTIONS)</h2>
+                            <p>Status: ${optionsResponse.status}</p>
+                            <p>CORS Headers:</p>
+                            <ul>
+                                ${[...optionsResponse.headers.keys()].filter(k => k.toLowerCase().includes('access')).map(k =>
+                                    `<li>${k}: ${optionsResponse.headers.get(k)}</li>`
+                                ).join('')}
+                                ${optionsResponse.headers.get('access-control-allow-origin') ? '' : '<li style="color: red;">❌ No Access-Control-Allow-Origin header</li>'}
+                            </ul>
+                        `;
+                    } catch (error) {
+                        result.innerHTML += `<h2>OPTIONS Request Failed</h2><p>Error: ${error.message}</p>`;
+                    }
+                }
+
+            } catch (error) {
+                result.innerHTML = `<h2>Error</h2><p>${error.message}</p>`;
+            }
+        };
+    </script>
+</body>
+</html>

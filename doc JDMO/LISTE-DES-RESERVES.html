@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>DBCS - Liste des réserves</title>
+
+  <style>
+    @page { size: A4; margin: 18mm; }
+
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color:#000;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page{
+      width: 210mm;
+      min-height: 297mm;
+      box-sizing: border-box;
+      margin: 0 auto;
+      border: 1px solid #cfcfcf; /* light border like the preview */
+      padding: 18mm;
+      position: relative;
+    }
+
+    /* ---------- Header / Logo ---------- */
+    .logo{
+      text-align:center;
+      margin-top: 2mm;
+    }
+    .logo img{
+      max-width: 140mm;
+      max-height: 30mm;
+      display:block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    /* fallback if you don’t use an image */
+    .brand-text{
+      text-align:center;
+      margin-top: 2mm;
+    }
+    .brand-text .name{
+      font-size: 44px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      color:#cf1a1a;
+      line-height: 1;
+    }
+    .brand-text .tag{
+      font-size: 16px;
+      color:#666;
+      margin-top: 2mm;
+    }
+
+    /* ---------- Title ---------- */
+    .doc-title{
+      margin-top: 18mm;
+      text-align:center;
+      font-style: italic;
+      font-weight: 800;
+      color:#d60000;
+      text-decoration: underline;
+      letter-spacing: .5px;
+    }
+
+    /* ---------- Info box ---------- */
+    .box{
+      margin-top: 10mm;
+      border: 1px solid #000;
+      padding: 6mm 6mm;
+      box-sizing: border-box;
+      min-height: 38mm;
+    }
+    .box .row{
+      margin: 2mm 0;
+      font-size: 12px;
+    }
+    .label{
+      display:inline-block;
+      min-width: 38mm;
+    }
+    .fill{
+      display:inline-block;
+      width: 100mm;
+      border-bottom: 1px dotted #777;
+      height: 4mm;
+      vertical-align: baseline;
+    }
+
+    /* ---------- Lines list ---------- */
+    .lines{
+      margin-top: 12mm;
+      width:100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+    .lines td{
+      vertical-align: top;
+      padding: 3mm 0;
+      font-size: 12px;
+    }
+    .num{
+      width: 6mm;
+    }
+    .dots{
+      border-bottom: 1px dotted #777;
+      height: 4mm;
+      width: 100%;
+    }
+
+    /* ---------- Signature blocks ---------- */
+    .signatures{
+      margin-top: 22mm;
+      width:100%;
+      border-collapse: collapse;
+    }
+    .signatures td{
+      width:50%;
+      vertical-align: top;
+      font-size: 11px;
+    }
+    .signatures .left{
+      padding-right: 10mm;
+    }
+    .signatures .right{
+      padding-left: 10mm;
+      text-align: right;
+    }
+    .sign-title{
+      margin-top: 4mm;
+      font-weight: 700;
+    }
+
+    /* ---------- Footer ---------- */
+    .footer{
+      position:absolute;
+      left:0;
+      right:0;
+      bottom: 14mm;
+      text-align:center;
+      font-size: 10px;
+      color:#1a51ff;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER: use either image logo OR text logo -->
+    <div class="logo">
+      <!-- Replace with your logo file if you have one -->
+      <!-- <img src="{{dbcs_logo_url}}" alt="DBCS Logo"> -->
+    </div>
+
+    <!-- Text fallback (remove if you use image) -->
+    <div class="brand-text">
+      <div class="name">DBCS</div>
+      <div class="tag">Le bâtiment à l’état pur</div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="doc-title">LISTE DES RESERVES</div>
+
+    <!-- INFO BOX -->
+    <div class="box">
+      <div class="row"><span class="label">Monsieur :</span> <span class="fill">{{monsieur}}</span></div>
+      <div class="row"><span class="label">Adresse client :</span> <span class="fill">{{adresse_client}}</span></div>
+      <div class="row"><span class="label">Adresse chantier :</span> <span class="fill">{{adresse_chantier}}</span></div>
+      <div class="row" style="margin-top:6mm;"><span class="label">Date :</span> <span class="fill">{{date}}</span></div>
+    </div>
+
+    <!-- RESERVES LINES (1-13) -->
+    <table class="lines">
+      <tr>
+        <td style="width:50%; padding-right:10mm;">
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td class="num">1</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">2</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">3</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">4</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">5</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">6</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">7</td><td><div class="dots"></div></td></tr>
+          </table>
+        </td>
+
+        <td style="width:50%; padding-left:10mm;">
+          <table style="width:100%; border-collapse:collapse;">
+            <tr><td class="num">8</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">9</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">10</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">11</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">12</td><td><div class="dots"></div></td></tr>
+            <tr><td class="num">13</td><td><div class="dots"></div></td></tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <!-- SIGNATURES -->
+    <table class="signatures">
+      <tr>
+        <td class="left">
+          <div>Fait en deux exemplaires à :</div>
+          <div><span class="fill" style="width:60mm;">{{lieu}}</span></div>
+
+          <div class="sign-title">Signature précédée de la mention</div>
+          <div>« Lu et approuvé »</div>
+          <div style="margin-top:2mm;"><b>Le maître de l’ouvrage,</b></div>
+        </td>
+
+        <td class="right">
+          <div>Le <span class="fill" style="width:40mm;">{{date_signature}}</span></div>
+
+          <div class="sign-title">Signature précédée de la mention</div>
+          <div>« Lu et approuvé »</div>
+          <div style="margin-top:2mm;"><b>Pour DBCS</b></div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- FOOTER -->
+    <div class="footer">SIRET : 79495222600049 – APE : 4399C</div>
+  </div>
+</body>
+</html>

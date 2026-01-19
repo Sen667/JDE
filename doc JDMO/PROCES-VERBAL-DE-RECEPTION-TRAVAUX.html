@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>DBCS - Procès-Verbal de Réception de Travaux</title>
+
+  <style>
+    @page { size: A4; margin: 18mm; }
+
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      color:#000;
+      line-height: 1.45;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page{
+      width: 210mm;
+      min-height: 297mm;
+      box-sizing: border-box;
+      margin: 0 auto;
+      border: 1px solid #cfcfcf;   /* light border like screenshot */
+      padding: 18mm;
+      position: relative;
+    }
+
+    /* --------- Logo area --------- */
+    .logo{
+      text-align:center;
+      margin-top: 4mm;
+    }
+    .logo img{
+      max-width: 140mm;
+      max-height: 34mm;
+      display:block;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+    /* fallback text brand (remove if using image) */
+    .brand-text{ text-align:center; }
+    .brand-text .name{
+      font-size: 48px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      color:#c71919;
+      line-height: 1;
+      margin-top: 2mm;
+    }
+    .brand-text .tag{
+      font-size: 16px;
+      color:#666;
+      margin-top: 1mm;
+    }
+
+    /* --------- Title boxed --------- */
+    .title-box{
+      margin: 14mm auto 10mm auto;
+      border: 2px solid #000;
+      width: 92%;
+      text-align:center;
+      padding: 3mm 4mm;
+      box-sizing: border-box;
+    }
+    .title-box span{
+      color:#d60000;
+      font-weight: 800;
+      font-style: italic;
+      text-decoration: underline;
+      letter-spacing: .5px;
+      font-size: 14px;
+      text-transform: uppercase;
+    }
+
+    /* --------- Content --------- */
+    .content{
+      width: 92%;
+      margin: 0 auto;
+      font-size: 12px;
+    }
+
+    .line{
+      margin: 7mm 0 0 0;
+    }
+
+    .underline{
+      border-bottom: 1px dotted #666;
+      display:inline-block;
+      min-width: 90mm;
+      height: 4mm;
+      vertical-align: baseline;
+    }
+
+    .muted{
+      color:#333;
+    }
+
+    .with-without{
+      margin-top: 8mm;
+      font-style: italic;
+    }
+
+    .article-title{
+      margin-top: 10mm;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .article{
+      margin-top: 2mm;
+      font-size: 10.5px; /* smaller like the screenshot paragraph */
+      line-height: 1.35;
+      text-align: justify;
+    }
+
+    /* --------- Signatures --------- */
+    .signatures{
+      width: 92%;
+      margin: 14mm auto 0 auto;
+      border-collapse: collapse;
+      font-size: 11px;
+    }
+    .signatures td{
+      width: 50%;
+      vertical-align: top;
+      padding-top: 2mm;
+    }
+    .signatures .right{
+      text-align: right;
+    }
+
+    .sig-block{
+      margin-top: 6mm;
+    }
+
+    .bold{ font-weight: 700; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER / LOGO -->
+    <div class="logo">
+      <!-- Replace with your real logo URL if available -->
+      <!-- <img src="{{dbcs_logo_url}}" alt="DBCS Logo"> -->
+      <div class="brand-text">
+        <div class="name">DBCS</div>
+        <div class="tag">Le bâtiment à l'état pur</div>
+      </div>
+    </div>
+
+    <!-- TITLE -->
+    <div class="title-box">
+      <span>PROCES-VERBAL DE RECEPTION DE TRAVAUX</span>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="content">
+      <p class="line">
+        Monsieur et Madame 
+        <span class="underline">{{client_nom_prenom}}</span>
+      </p>
+
+      <p class="line">
+        Demeurant :
+        <span class="underline">{{client_adresse}}</span>
+      </p>
+
+      <p class="line">
+        Déclarent en qualité de maître de l’ouvrage accepter les travaux réalisés à l’adresse suivante :
+        <span class="underline" style="min-width: 110mm;">{{chantier_sinistre}}</span>
+      </p>
+
+    <table style="margin-top:8mm; font-style: italic; font-size: 12px;">
+  <tr>
+    <td style="padding-right:20mm;">
+      <label>
+        <input type="checkbox" style="vertical-align: middle; margin-right:4mm;">
+        Avec réserves
+      </label>
+    </td>
+    <td>
+      <label>
+        <input type="checkbox" style="vertical-align: middle; margin-right:4mm;">
+        Sans réserves
+      </label>
+    </td>
+  </tr>
+</table>
+
+      <p class="line muted">
+        DBCS devra, dans un délai de 60 jours remédié aux réserves éventuellement mentionnées.
+     <p style="font-size: 12.5px;font-weight: bold;font-style: italic;margin: 6mm 0 3mm 0;">
+  	Loi n° 75-584 du 16 juillet 1971
+	</p>
+
+      <p class="article-title">ARTICLE PREMIER :</p>
+      <p class="article">
+        Les paiements des acomptes sur la valeur définitive des marchés de travaux privé visés à l’article 1793
+        du code civil peuvent être accompagnés d’une retenue égale au plus à 5% de leur montant et garantissant
+        contractuellement l’exécution des travaux, pour satisfaire, le cas échéant, aux réserves faites à la réception
+        par le maître de l’ouvrage.
+        <br><br>
+        Le maître de l’ouvrage doit consigner entre les mains d’un consignataire, accepté par les deux parties ou à défaut
+        désigné par le président du tribunal de grande instance ou du tribunal de commerce, une somme égale à la retenue
+        effectuée. Dans le cas où les sommes ayant fait l’objet de la retenue de garantie disparaissaient la consignation
+        visée à l’alinéa précédent, le maître de l’ouvrage devra compléter celle-ci jusqu’au montant des sommes ainsi retenues.
+        <br><br>
+        Toutefois, la retenue de garantie stipulée contractuellement n’est pas pratiquée si l’entrepreneur fournit pour un montant
+        égal une caution personnelle et solidaire émanant d’un établissement financier figurant sur une liste fixée par décret.
+        <br><br>
+        Loi n° 75-584 du 16 juillet 1971
+      </p>
+
+      <!-- SIGNATURES -->
+      <table class="signatures">
+        <tr>
+          <td>
+            <div>Fait en deux exemplaires à :</div>
+            <div class="sig-block"><span class="underline" style="min-width: 60mm;"></span></div>
+
+            <div class="sig-block">
+              Signature précédée de la mention<br>
+              « Lu et approuvé »<br>
+              <span class="bold">Le maître de l’ouvrage,</span>
+            </div>
+          </td>
+
+          <td class="right">
+            <div>Le : <span class="underline" style="min-width: 45mm;"></span></div>
+
+            <div class="sig-block">
+              Signature précédée de la mention<br>
+              « Lu et approuvé »<br>
+              <span class="bold">Pour DBCS</span>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+
+  </div>
+</body>
+</html>

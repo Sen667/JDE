@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Mesures d’urgence</title>
+  <style>
+    /* A4 print */
+    @page { size: A4; margin: 14mm; }
+    body{
+      margin:0;
+      font-family: Arial, Helvetica, sans-serif;
+      color:#111;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto;
+      border:1px solid #cfcfcf;
+      box-sizing:border-box;
+      padding:14mm;
+      position:relative;
+    }
+
+    /* Colors */
+    .green{ color:#3b7a2a; }
+    .orange{ color:#e36c22; }
+    .red{ color:#d81313; }
+
+    /* Header */
+    .top{
+      width:100%;
+      border-collapse:collapse;
+      margin-bottom:10mm;
+    }
+    .top td{ vertical-align:top; }
+    .title{
+      text-align:center;
+      font-size:18px;
+      font-weight:600;
+      text-decoration: underline;
+      margin-top:8mm;
+    }
+    .brand{
+      text-align:center;
+      font-size:11px;
+      margin-top:2mm;
+    }
+    .tagline{
+      text-align:center;
+      font-size:10px;
+      font-style:italic;
+      margin-top:1mm;
+    }
+    .slogan{
+      text-align:center;
+      font-size:9px;
+      margin-top:2mm;
+      font-weight:600;
+    }
+    .logoBox{
+      text-align:center;
+      width:55mm;
+    }
+    .logoBox .jde{
+      font-size:14px;
+      letter-spacing:2px;
+      font-weight:700;
+      margin-bottom:2mm;
+    }
+    .logoBox img{
+      max-width:26mm;
+      max-height:26mm;
+      display:block;
+      margin:0 auto 2mm auto;
+      object-fit:contain;
+    }
+
+    /* Form lines */
+    .form{
+      margin-top:4mm;
+      font-size:12px;
+    }
+    .row{
+      width:100%;
+      border-collapse:collapse;
+      margin:0 0 6mm 0;
+    }
+    .row td{ vertical-align:bottom; }
+    .label{
+      width:72mm;
+      padding-right:4mm;
+      white-space:nowrap;
+    }
+    .dots{
+      border-bottom:1px dotted #666;
+      height:6mm;
+    }
+    .value{
+      padding-left:2mm;
+      font-size:12px;
+    }
+
+    /* Observation box */
+    .obsWrap{
+      margin-top:10mm;
+    }
+    .obsLabel{
+      font-size:12px;
+      margin-bottom:2mm;
+      font-weight:600;
+    }
+    .obsBox{
+      border:1px solid #444;
+      height:75mm;
+      width:100%;
+      box-sizing:border-box;
+      padding:4mm;
+      font-size:12px;
+      line-height:1.4;
+    }
+
+    /* Footer logo center */
+    .footer{
+      position:absolute;
+      left:0; right:0;
+      bottom:14mm;
+      text-align:center;
+    }
+    .footer .jde{
+      font-size:14px;
+      letter-spacing:2px;
+      font-weight:700;
+      margin-bottom:2mm;
+    }
+    .footer img{
+      max-width:24mm;
+      max-height:24mm;
+      display:block;
+      margin:0 auto 2mm auto;
+      object-fit:contain;
+    }
+    .footer .brand{ margin-top:0; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <!-- HEADER -->
+    <table class="top">
+      <tr>
+        <td>
+          <div class="title green">Mesures d’urgence</div>
+        </td>
+        <td style="width:60mm;">
+          <div class="logoBox">
+            <div class="jde green">J.D.E</div>
+            <!-- Replace with your logo asset -->
+            <img src="{{logo_url}}" alt="Logo" />
+            <div class="brand green">Jacky Duquesne Expertises</div>
+            <div class="tagline green">Expert en technicité Bâtiment</div>
+            <div class="slogan orange">Le trait d’union entre l’assurance et son client</div>
+          </div>
+        </td>
+      </tr>
+    </table>
+
+    <!-- FORM -->
+    <div class="form">
+      <table class="row">
+        <tr>
+          <td class="label green">Nom - Prénom sinistré:</td>
+          <td class="dots"><span class="value">{{sinistre_nom_prenom}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label red">Date du sinistre:</td>
+          <td class="dots"><span class="value">{{date_sinistre}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label orange">Type de sinistre:</td>
+          <td class="dots"><span class="value">{{type_sinistre}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label green">Nom de la Compagnie d’assurance:</td>
+          <td class="dots"><span class="value">{{compagnie_assurance}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label green">Référence Assurance:</td>
+          <td class="dots"><span class="value">{{reference_assurance}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label green">Numéro de Police d’assurance:</td>
+          <td class="dots"><span class="value">{{numero_police}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label green">Nom de l’expert:</td>
+          <td class="dots"><span class="value">{{nom_expert}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label green">Nature de travaux:</td>
+          <td class="dots"><span class="value">{{nature_travaux}}</span></td>
+        </tr>
+      </table>
+
+      <table class="row">
+        <tr>
+          <td class="label red">Nom de l’entreprise d’intervention:</td>
+          <td class="dots"><span class="value">{{entreprise_intervention}}</span></td>
+        </tr>
+      </table>
+
+      <!-- OBS -->
+      <div class="obsWrap">
+        <div class="obsLabel orange">Observation(s):</div>
+        <div class="obsBox">{{observations}}</div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div class="jde green">J.D.E</div>
+      <img src="{{logo_url}}" alt="Logo" />
+      <div class="brand green">Jacky Duquesne Expertises</div>
+      <div class="tagline green">Expert en technicité Bâtiment</div>
+      <div class="slogan orange">Le trait d’union entre l’assurance et son client</div>
+    </div>
+
+  </div>
+</body>
+</html>

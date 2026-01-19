@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <title>Contrat de Maîtrise d’Œuvre - JDMO</title>
+  <style>
+    @page { size: A4; margin: 20mm; }
+
+    body{
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color:#000;
+      line-height: 1.5;
+      margin:0;
+    }
+
+    .page{
+      position: relative;
+      min-height: 257mm; /* ~A4 height minus margins, helps layout */
+      page-break-after: always;
+    }
+    .page:last-child{ page-break-after: auto; }
+
+    /* header (table-based, PDF friendly) */
+    .top-header{
+      width:100%;
+      border-collapse: collapse;
+      font-size:12px;
+      margin-bottom: 15px;
+    }
+    .top-header td{ vertical-align:top; }
+    .top-header .right{ text-align:right; }
+
+    /* page number box */
+    .page-box{
+      position:absolute;
+      right:0;
+      top:34px;              /* visually similar to screenshot */
+      border:1px solid #000;
+      padding:2px 10px;
+      font-size:11px;
+      border-radius:3px;
+      background:#fff;
+    }
+
+    /* title bar */
+    .title-bar{
+      background-color:#cde8b9;
+      border:1px solid #000;
+      text-align:center;
+      font-weight:bold;
+      padding:8px 0;
+      margin-bottom:20px;
+      text-transform: uppercase;
+    }
+
+    p{ margin: 4px 0; }
+
+    .section-title{
+      font-weight:bold;
+      text-decoration: underline;
+      margin-top: 15px;
+    }
+
+    .sub-title{
+      font-weight:bold;
+      text-align:center;
+      text-decoration: underline;
+      margin: 12px 0 6px 0;
+    }
+
+    .label{ font-weight:bold; }
+
+    .indent{ margin-left: 20px; }
+
+    .small-gap{ height:10px; }
+    .big-gap{ height:18px; }
+
+    /* list bullets like in the PDF */
+    .dash-list{ margin:6px 0 8px 0; padding-left: 0; }
+    .dash-list li{
+      list-style: none;
+      margin:2px 0;
+    }
+    .dash-list li:before{
+      content:"- ";
+    }
+
+    /* Red remuneration block */
+    .remu-wrap{
+      margin-top: 10px;
+      background:#e10f0f;
+      color:#000;
+      padding:10px 12px;
+    }
+    .remu-title{
+      font-weight:bold;
+      text-decoration: underline;
+      margin:0 0 6px 0;
+    }
+    .remu-text{
+      margin:0;
+      font-size:12px;
+      line-height:1.4;
+    }
+    .remu-grid{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:8px;
+      font-size:12px;
+    }
+    .remu-grid td{
+      padding:2px 6px;
+      vertical-align:top;
+    }
+
+    .sign-table{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:30px;
+    }
+    .sign-table td{
+      width:50%;
+      text-align:center;
+      padding-top:30px;
+    }
+  </style>
+</head>
+
+<body>
+
+<!-- ===================================================== -->
+<!-- PAGE 1/5 -->
+<!-- ===================================================== -->
+<div class="page">
+  <table class="top-header">
+    <tr>
+      <td>26 rue Jean Moulin&nbsp;&nbsp;59490 SOMAIN</td>
+      <td class="right">000000 J.D.M.O&nbsp;–&nbsp;Tél : 06.77.52.92.03&nbsp;Mail : jacky.duquesne.mo@gmail.com</td>
+    </tr>
+  </table>
+
+  <div class="page-box">Page 1/5</div>
+
+  <div class="title-bar">CONTRAT DE MAÎTRISE D’ŒUVRE</div>
+
+  <p>Le présent contrat de maîtrise d'œuvre concerne l'opération définie ci-après :</p>
+  <p><span class="label">Objet :</span> Rénovation d’un bâtiment suite</p>
+  <p><span class="label">Adresse :</span> {{adresse_chantier}}</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Entre les soussignés :</p>
+
+  <div class="big-gap"></div>
+
+  <p class="label">Le maître d’ouvrage :</p>
+  <p class="indent">{{CLIENT_NOM_PRENOM}}</p>
+
+  <div class="big-gap"></div>
+
+  <p class="label">Adresse :</p>
+  <p>{{CLIENT_ADRESSE}}</p>
+  <p class="label">Téléphone :</p>
+  <p>{{CLIENT_TELEPHONE}}</p>
+  <p class="label">Mail :</p>
+  <p>{{CLIENT_EMAIL}}</p>
+
+  <div class="big-gap"></div>
+
+  <p class="label">Et,</p>
+
+  <div class="big-gap"></div>
+
+  <p class="label">Le maître d’œuvre : SARL J.D.M.O</p>
+  <p class="indent">Adresse : 26 rue Jean Moulin 59490 SOMAIN</p>
+  <p class="indent">Téléphone : 06.77.52.92.03</p>
+  <p class="indent">Mail : jacky.duquesne.mo@gmail.com</p>
+  <p class="indent">Siret : 905 402 905 000 12</p>
+  <p class="indent">Code APE : 71.12B</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Définition :</p>
+  <p>
+    Les termes "maître d’ouvrage" désignent la personne physique ou morale pour le compte de laquelle la
+    mission est créée et qui en paye les honoraires prévues.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Programme</p>
+  <p>
+    Le maître d’ouvrage définit son programme, l’enveloppe financière dont il dispose et le délais
+    d’exécution souhaité, produit le titre de propriété, fournit, selon le cas, à la demande du maître
+    d’œuvre, les renseignements et documents suivants : relevés de géomètre, relevés des bâtis et des
+    héberges, certificat d’urbanisme, servitudes, résultat et analyses de la campagne des sondages,
+    règlements de copropriété ou de lotissements, documents photographiques ou autres permettant
+    l’intégration du projet dans le site, etc.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Responsabilités et assurances :</p>
+  <p>
+    Le maître d’œuvre assumera les responsabilités professionnelles définies par les lois et règlements
+    en vigueur et particulièrement celles édictées par les articles 1792, 1792-2, 1792-3 et 2270 du code
+    civil, dans les limites de la mission qui lui est confiée par le maître d’ouvrage et sans obligation
+    solidaire ni "in-solidum".
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p>Assurance J.D.M.O : AXA contrat N° 10910050004</p>
+
+  <div class="big-gap"></div>
+
+  <p>Le maître de l’ouvrage souscrit une assurance de dommage ouvrage dans les conditions fixées par la loi.</p>
+</div>
+
+<!-- ===================================================== -->
+<!-- PAGE 2/5 -->
+<!-- ===================================================== -->
+<div class="page">
+  <table class="top-header">
+    <tr>
+      <td>26 rue Jean Moulin&nbsp;&nbsp;59490 SOMAIN</td>
+      <td class="right">000000 J.D.M.O&nbsp;–&nbsp;Tél : 06.77.52.92.03&nbsp;Mail : jacky.duquesne.mo@gmail.com</td>
+    </tr>
+  </table>
+
+  <div class="page-box">Page 2/5</div>
+
+  <p class="section-title">Contenu de la mission :</p>
+  <p>
+    La mission confiée au maître d'œuvre par le maître d'ouvrage se décompose en plusieurs phases, ci après définies.
+  </p>
+  <p>
+    Toute modification du programme ou de la réglementation entraînant de nouvelles études ou la reprise partielle de
+    celle-ci, donnera lieu à une rémunération complémentaire fixée préalablement par les parties : elle fera l'objet d'un
+    avenant au contrat.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Etudes d'avant-projets :</p>
+
+  <p class="sub-title">Etudes d'avant projet sommaire</p>
+  <p>
+    Le maître d’œuvre précise la conception générale en plan et en volume, propose des dispositions techniques
+    pouvant être envisagées ainsi qu’éventuellement les performances techniques à atteindre, précise un calendrier de
+    la réalisation de l’ouvrage, établit une estimation provisoire du coût prévisionnel des travaux.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="sub-title">Etudes d'avant projet sommaire</p>
+  <p>
+    Elles sont fondées sur l'avant projet sommaire approuvé par le maître de l'ouvrage.
+  </p>
+  <p>
+    Le maître d’œuvre vérifie le respect des différentes réglementations,arrête les plans, coupes et façades, les
+    dimensions de l'ouvrage ainsi que son aspect, justifie les solutions techniques retenues, détermine les surfaces
+    détaillées de tous les éléments du programme et établit la notice descriptive précisant les matériaux.
+  </p>
+  <p>
+    Le maître de l'ouvrage arrête certains choix d'équipements en fonction de l'estimation des coûts d'investissement
+    et d'exploitation.
+  </p>
+  <p>
+    Le maître d'œuvre établit l'estimation définitive du coût prévisionnel des travaux, dans la limite d'une variation de
+    10% en euros constants.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Dossier permis de construire :</p>
+  <p>
+    Le maître d'œuvre établit les documents nécessaire à la constitution du dossier de demande de permis de
+    construire suivant les réglementation en vigueur : notamment, plan de masse, plan de niveaux, coupes et façades.
+  </p>
+  <p>Il assiste le maître d'ouvrage pour la constitution du dossier administratif.</p>
+  <p>
+    Le maître d'ouvrage signe tous les documents nécessaires y compris les pièces graphiques: cette formalité vaut
+    approbation par lui du dossier d'avant projet.
+  </p>
+  <p>
+    Postérieurement au dépôt du permis de construire, le maître d'œuvre assiste son client dans ses rapports avec les
+    administrations.
+  </p>
+  <p>
+    Le maître d'ouvrage informe le maître d'œuvre de toute correspondance avec l'administration et,dès réception du
+    permis de construire, transmet au maître d'œuvre copie de l'arrêté et de ses annexes et procède à l'affichage
+    réglementaire sur le terrain.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Les études de projet de conception générales :</p>
+</div>
+
+<!-- ===================================================== -->
+<!-- PAGE 3/5 -->
+<!-- ===================================================== -->
+<div class="page">
+  <table class="top-header">
+    <tr>
+      <td>26 rue Jean Moulin&nbsp;&nbsp;59490 SOMAIN</td>
+      <td class="right">000000 J.D.M.O&nbsp;–&nbsp;Tél : 06.77.52.92.03&nbsp;Mail : jacky.duquesne.mo@gmail.com</td>
+    </tr>
+  </table>
+
+  <div class="page-box">Page 3/5</div>
+
+  <p>
+    Le maître d'œuvre précise par des plans, coupes, et élévations les formes des différents éléments de la
+    construction, la nature et les caractéristiques des matériaux et les principes de leur mise en œuvre, définit
+    l'implantation, l'encombrement de tous les équipements techniques dont les ouvrages et établit les plans de
+    repérage nécessaires à la compréhension du projet, établit un coût prévisionnel des travaux par corps d'état, arrête
+    le délais global de la réalisation de l'ouvrage.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Assistance pour la passation des marches de travaux :</p>
+  <p>
+    Le maître d’ouvrage examine avec le maître d'œuvre les modalités de réalisation de l’ouvrage, décide du mode de
+    consultation des entreprises et de l’évolution des marchés de travaux, après avis du maître d'œuvre, et dresse,
+    avec celui-ci, la liste des entreprises à consulter.
+  </p>
+  <p>
+    Le maître d'œuvre rassemble les éléments du projet, nécessaires à la consultation, permettant aux entrepreneurs
+    consultés d’apprécier la nature, la quantité, la qualité et les limites de leurs prestations et d’établir leurs offres à
+    savoir :
+  </p>
+
+  <ul class="dash-list">
+    <li>Plans, coupes, élévations côtés aux échelles suffisantes</li>
+    <li>Tout détails nécessaires aux échelles appropriées,</li>
+    <li>Devis descriptifs détaillés par corps d'état,</li>
+    <li>Cadres de décomposition des offres des entreprises,</li>
+    <li>Programme envisagé de déroulement des travaux,</li>
+  </ul>
+
+  <p>Le maître d'ouvrage approuve le dossier de consultation et le fournit aux entreprises consultées.</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Mise au point des marches de travaux :</p>
+  <p>Le maître d'ouvrage choisit les entreprises, avec l'assistance du maître d'œuvre.</p>
+  <p>Le maître d'œuvre agrée les entrepreneurs retenus pour l'exécution des travaux, signe les pièces du marché et les avenants éventuels.</p>
+  <p>Le maître d'œuvre et le maître d'ouvrage conviennent d'une date d'ouverture de chantier.</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Les études de synthese :</p>
+  <p>
+    Quand les marchés de travaux sont attribués à plusieurs entrepreneurs chargés d'établir leurs propres plans
+    d'exécution, le maître d'ouvrage confie au maître d'œuvre la mission complémentaire d'étude de synthèse, en vue
+    d'assurer la cohérence des éléments d'ouvrage de tous les corps d'état.
+  </p>
+  <p>
+    Quand le marché est attribué à une entreprise générale ou à un groupement d'entreprises qui sont chargés
+    d'établir leurs plans d'exécution, l'entreprise générale ou le mandataire du groupement doit les compléter par les
+    plans de synthèse.
+  </p>
+  <p>Dans ce dernier cas, le maître d'œuvre peut participer à la cellule de synthèse.</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Direction de l'execution des marches de travaux :</p>
+  <p>
+    Lorsque les études d'exécution sont partiellement ou intégralement réalisées par les entreprises, le maître d'œuvre
+    examine la conformité de ces études d'exécution au projet et appose son visa sur les documents (plans,
+    spécifications) pour assurer au maître d'ouvrage qu'ils lui traduisent bien les éléments du dossier de conception
+    générale.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Direction et comptabilite des travaux :</p>
+  <p>
+    Le maître d'œuvre rédige et signe les ordres de service, mais le maître d'ouvrage doit aussi les signer le premier,
+    ordonnant l'ouverture de chantier.
+  </p>
+  <p>
+    Le maître d'œuvre doit aussi donner son accord ou signer les ordres de services modifiant les termes des marchés
+    de travaux.
+  </p>
+  <p>
+    Le maître d'œuvre organise et dirige les réunions de chantier et en règle les comptes rendus, qu'il diffuse à tous
+    les intéressés,vérifie l'avancement des travaux et leur conformité avec les pièces du marché, vérifie les situations
+    de l'entrepreneur dans un délais de 21 jours à compter de leur réception et établit les propositions de paiement,
+    vérifie les mémoires établis par les entreprises dans un délais de 45 jours à compter de leur réception, établit le
+    décompte définitif des travaux, et propose le règlement pour solde.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Assistance aux operations de reception-preception des ouvrages :</p>
+  <p>
+    Le maître d'œuvre assiste le maître d'ouvrage pour la réception :
+    <br/>- Il organise une visite contradictoire des travaux en vue de la réception.
+    <br/>- Il rédige les proces verbaux et la liste des réserves éventuelles.
+    <br/>- Il suit le déroulement des reprises et constate, à la date prévue, la levée des réserves en présence du maître d'ouvrage.
+  </p>
+  <p>Le maître d'ouvrage prononce la réception des ouvrages, avec ou sans réserves.</p>
+  <p>La réception constitue la date de départ des délais des responsabilités et des garanties légales.</p>
+  <p>
+    A cette date, la garde de l'ouvrage est transférée de l'entrepreneur au maître d'ouvrage qui doit, dès lors, avoir
+    contacté les assurances nécessaires.
+  </p>
+
+  <!-- RED BLOCK -->
+  <div class="remu-wrap">
+    <p class="remu-title">Rémunération :</p>
+    <p class="remu-text">
+      En rémunération de la mission déterminée au dit contrat,le maître d'ouvrage versera au maître d'œuvre une
+      rémunération de ..................(€ ...................cts) dont % de TVA.
+      <br/><br/>
+      Cette rémunération sera versé selon les modalités suivantes :
+    </p>
+
+    <table class="remu-grid">
+      <tr>
+        <td style="width:50%;">
+          20%&nbsp;Acompte signature contrat<br/>
+          20%&nbsp;Dépôt des documents administratifs<br/>
+          5%&nbsp;Passation des marchés<br/>
+          5%&nbsp;Ouverture de chantier<br/>
+          15%&nbsp;Réception GO / Toiture
+        </td>
+        <td style="width:50%;">
+          10%&nbsp;Réception menuiseries<br/>
+          10%&nbsp;Réception plâtrerie<br/>
+          10%&nbsp;Réception électricité<br/>
+          10%&nbsp;Réception plomberie<br/>
+          5%&nbsp;Réception de chantier
+        </td>
+      </tr>
+    </table>
+  </div>
+</div>
+
+<!-- ===================================================== -->
+<!-- PAGE 4/5 -->
+<!-- ===================================================== -->
+<div class="page">
+  <table class="top-header">
+    <tr>
+      <td>26 rue Jean Moulin&nbsp;&nbsp;59490 SOMAIN</td>
+      <td class="right">000000 J.D.M.O&nbsp;–&nbsp;Tél : 06.77.52.92.03&nbsp;Mail : jacky.duquesne.mo@gmail.com</td>
+    </tr>
+  </table>
+
+  <div class="page-box">Page 4/5</div>
+
+  <p>
+    Le maître d'ouvrage règlera les notes d'honoraires présentés par le maître d'œuvre dès réception de celles-ci
+    (délais au maximum de 20 jours), si la facture régulièrement demandée, reste impayée, après mise en demeure
+    adressée au maître d'ouvrage par courrier ou par Email,
+  </p>
+  <p>
+    Le maître d'œuvre sera en droit de suspendre sa mission et de faire intervenir l'entité juridique nécessaire afin
+    d'aboutir au règlement de sa facture.
+  </p>
+  <p>
+    A défaut de paiement dans les délais impartis des intérêts seront dus par le maître d'ouvrage, de plein droit et sans
+    mise en demeure préalable, à un taux supérieur à deux fois avances de la banque de France depuis la date de
+    paiement.
+  </p>
+  <p>Tous les paiements seront exigibles à la réception du projet.</p>
+  <p>(En plus des honoraires déterminés, le maître d'ouvrage versera au maître d'œuvre la TVA au taux en vigueur.)</p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Note 1 :</p>
+  <p>Toute modification au permis de construire sera facturée 5% du montant initial € HT</p>
+
+  <p class="section-title">Note 2 :</p>
+  <p>
+    Si des études complémentaires internes nécessaires par la nature du terrain ou la nature des travaux
+    devaient être réalisées, elles seraient à la charge du maître d'ouvrage.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Indisponibilité :</p>
+  <p>
+    Si, par la suite de maladie, de décès ou pour toute autre raison grave, les gérants de la société ou propriétaires
+    sont dans l'impossibilité d'achever leur mission, leur remplaçant est proposé au maître d'ouvrage par eux même
+    ou leurs ayant droit.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Résiliation- Transfert Litige :</p>
+  <p>
+    Le présent contrat sera résilié de plein droit par la partie qui n'est ni défaillante, ni en infraction avec ses propres
+    obligations, un mois après la mise en demeure restée sans effet, notifiée par lettre recommandée avec accusé de
+    réception, et contenant la déclaration du user du bénéfice de la présente clause, dans tous les cas d'inexécution ou
+    d'infraction par l'autre partie aux dispositions du présent contrat.
+  </p>
+  <p>
+    En cas de résiliation sur l'initiative du maître d'ouvrage que ne justifierait pas le comportement fautif du maître
+    d'œuvre, ce dernier aura droit au paiement, outre celle rémunération du jour de cette résiliation d'une indemnité égale
+    à 20% de la partie des honoraires qui lui auraient été versés si sa mission n'avait pas été prématurément interrompue.
+  </p>
+  <p>
+    Le maître d'œuvre est en droit de renoncer à la poursuite de son contrat dès lors que les motifs en sont justes et
+    raisonnables, soit à titre d'exemples :
+    <br/>- impossibilité pour le maître d'œuvre de respecter les dispositions légales ou réglementaires,
+    <br/>- choix par le maître d'ouvrage d'une entreprise ne présentant pas les garanties indispensables à la bonne exécution de l'ouvrage.
+  </p>
+
+  <div class="big-gap"></div>
+
+  <p class="section-title">Sécurité sur le chantier :</p>
+  <p>
+    Toutes les entreprises intervenantes sur le chantier feront le nécessaire, afin de veiller à la mise en conformité de
+    celui-ci depuis ouvrages.
+  </p>
+  <p>
+    En cas d'intervention du maître d'ouvrage, celui-ci engagera sa responsabilité en cas d'accident, en aucun cas il ne
+    pourra se retourner contre le maître d'œuvre, ainsi que les entreprises.
+  </p>
+  <p><i>Ce contrat est sous réserve d'un refus de permis de construire dont la faute incomberait au maître d'œuvre</i></p>
+</div>
+
+<!-- ===================================================== -->
+<!-- PAGE 5/5 -->
+<!-- ===================================================== -->
+<div class="page">
+  <table class="top-header">
+    <tr>
+      <td>26 rue Jean Moulin&nbsp;&nbsp;59490 SOMAIN</td>
+      <td class="right">000000 J.D.M.O&nbsp;–&nbsp;Tél : 06.77.52.92.03&nbsp;Mail : jacky.duquesne.mo@gmail.com</td>
+    </tr>
+  </table>
+
+  <div class="page-box">Page 5/5</div>
+
+  <div class="big-gap"></div>
+  <div class="big-gap"></div>
+
+  <p>Fait à : {{lieu_signature}}</p>
+  <p>Le : {{date_signature}}</p>
+  <p>Fait en 5 pages et en 2 originaux.</p>
+
+  <table class="sign-table">
+    <tr>
+      <td><span class="label">Le maître d’ouvrage</span></td>
+      <td><span class="label">Le maître d’œuvre</span></td>
+    </tr>
+  </table>
+</div>
+
+</body>
+</html>

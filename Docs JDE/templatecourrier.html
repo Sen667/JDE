@@ -1,0 +1,265 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <title>Convocation expertise</title>
+  <style>
+    /* ===== Print / A4 ===== */
+    @page { size: A4; margin: 14mm; }
+    body{
+      margin:0;
+      font-family: "Times New Roman", Times, serif;
+      color:#000;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto;
+      box-sizing:border-box;
+      border:1px solid #cfcfcf; /* light page border like your preview */
+      padding:0;
+    }
+
+    /* ===== Layout container ===== */
+    .content{
+      padding:12mm;
+      box-sizing:border-box;
+    }
+
+    table{ border-collapse:collapse; width:100%; }
+
+    /* ===== Header block ===== */
+    .header td{ vertical-align:top; }
+
+    .logoBox{
+      width:68mm;
+      background:#d9ddd6; /* grey/green panel */
+      padding:10mm 6mm 8mm 6mm;
+      box-sizing:border-box;
+    }
+    .logoBox .brand{
+      text-align:center;
+      color:#3b7a2a; /* green-ish */
+      font-size:15px;
+      font-weight:600;
+      margin-top:6mm;
+    }
+    .logoBox .tagline{
+      text-align:center;
+      font-size:11px;
+      color:#3b7a2a;
+      font-style:italic;
+      margin-top:1mm;
+    }
+    .logoBox .slogan{
+      margin-top:6mm;
+      text-align:center;
+      font-size:10px;
+      color:#e36c22; /* orange */
+      font-weight:600;
+    }
+    .logoBox img{
+      display:block;
+      margin:0 auto;
+      max-width:46mm;
+      max-height:34mm;
+      object-fit:contain;
+    }
+
+    .rightHeader{
+      padding-left:12mm;
+      box-sizing:border-box;
+    }
+
+    .recipient{
+      margin-top:8mm;
+      font-size:12px;
+    }
+    .recipient .line{ margin:0 0 10mm 0; }
+    .recipient .bold{ font-weight:700; }
+
+    /* ===== Info row under header ===== */
+    .infos{
+      margin-top:6mm;
+      font-size:11px;
+    }
+    .infos td{ vertical-align:top; }
+    .infos .leftInfo{
+      width:55%;
+      padding-right:10mm;
+      box-sizing:border-box;
+    }
+    .infos .rightInfo{
+      width:45%;
+      padding-left:10mm;
+      box-sizing:border-box;
+    }
+    .infos p{ margin:0; }
+
+    .letterType{
+      margin-top:10mm;
+      font-weight:700;
+      font-size:14px;
+    }
+    .dateTop{
+      margin-top:10mm;
+      font-size:12px;
+    }
+
+    /* ===== Body ===== */
+    .center{ text-align:center; }
+    .italic{ font-style:italic; }
+    .body{
+      margin-top:16mm;
+      font-size:13px;
+      line-height:1.35;
+    }
+    .body p{ margin:0 0 6mm 0; }
+
+    .hl{
+      color:#d81313;
+      text-decoration:underline;
+      font-weight:700;
+    }
+    .rdvTitle{
+      margin-top:10mm;
+      font-size:18px;
+      font-weight:800;
+      color:#d81313;
+      text-align:center;
+    }
+    .rdvSub{
+      margin-top:2mm;
+      font-size:16px;
+      font-weight:700;
+      text-align:center;
+    }
+
+    .signatureRow{
+      margin-top:10mm;
+      width:100%;
+      font-size:12px;
+    }
+    .signatureRow td{ vertical-align:top; }
+    .signatureRow .left{ width:60%; }
+    .signatureRow .right{ width:40%; text-align:right; }
+
+    /* ===== Footer ===== */
+    .footer{
+      padding:0 12mm 10mm 12mm;
+      box-sizing:border-box;
+      text-align:center;
+      font-size:11px;
+      margin-top:18mm;
+    }
+    .footer .small{ font-size:10px; }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+    <div class="content">
+
+      <!-- HEADER -->
+      <table class="header">
+        <tr>
+          <!-- Left logo panel -->
+          <td style="width:68mm;">
+            <div class="logoBox">
+              <!-- Replace with your logo image -->
+              <img src="{{logo_url}}" alt="Logo" />
+
+              <div class="brand">Jacky Duquesne Expertises</div>
+              <div class="tagline">Expert en technicité Bâtiment</div>
+              <div class="slogan">Le trait d’union entre l’assurance et son client</div>
+            </div>
+          </td>
+
+          <!-- Right header (recipient) -->
+          <td class="rightHeader">
+            <div class="recipient">
+              <p class="line"><span class="bold">DESTINATAIRE :</span> {{destinataire_nom}}</p>
+              <p class="line"><span class="bold">ADRESSE</span><br/>{{destinataire_adresse}}</p>
+              <p class="line" style="text-align:right; padding-right:8mm;">
+                <span class="bold">CODE POSTAL VILLE</span><br/>
+                {{destinataire_cp}} {{destinataire_ville}}
+              </p>
+            </div>
+          </td>
+        </tr>
+      </table>
+
+      <!-- INFOS -->
+      <table class="infos">
+        <tr>
+          <td class="leftInfo">
+            <p>Nom, Prénom du client : {{client_nom}} {{client_prenom}}</p>
+            <p>Adresse du sinistré : {{adresse_sinistre}}</p>
+            <p>Date du sinistre : {{date_sinistre}}</p>
+            <p>Réf JDE : {{ref_jde}}</p>
+
+            <div class="letterType">AR / Lettre simple</div>
+            <div class="dateTop">Le &nbsp; / &nbsp; /</div>
+          </td>
+
+          <td class="rightInfo">
+            <p>Réf. EXPERT : {{ref_expert}}</p>
+            <p>Dossier suivi par : {{dossier_suivi_par}}</p>
+            <p>Assistance : {{assistance}}</p>
+            <p>Assureur : {{assureur}}</p>
+            <p>Sinistre : {{sinistre}}</p>
+            <p>N° de contrat : {{numero_contrat}}</p>
+            <p>Assuré : {{assure}}</p>
+            <p>Affaire : {{affaire}}</p>
+          </td>
+        </tr>
+      </table>
+
+      <!-- BODY -->
+      <div class="body italic">
+        <p class="center">Madame, Monsieur,</p>
+
+        <p>
+          Agissant pour le compte de <span class="hl">{{CIVILITE}} {{NOM_DU_CLIENT}}</span>,
+          nous vous informons qu’à la suite de la réclamation effectuée par notre client(e)
+          en date du <span class="hl">{{DATE_RECLAMATION}}</span>, nous avons été chargés
+          d’une mission d’expertise des dommages dont il est fait mention dans cette déclaration :
+          <span class="hl">{{NATURE_DU_SINISTRE}}</span>.<br/>
+          Votre responsabilité étant susceptible d’être engagée, je vous invite à vous présenter, ou vous faire représenter.
+        </p>
+
+        <p>Nous organisons une réunion le :</p>
+
+        <div class="rdvTitle">{{DATE_ET_HEURE_DU_RDV}}</div>
+        <div class="rdvSub">Sur les lieux du sinistre cité en référence.</div>
+
+        <p style="margin-top:8mm;">
+          Nous vous prions d’agréer, Madame, Monsieur, l’expression de nos salutations distinguées.
+        </p>
+
+        <table class="signatureRow">
+          <tr>
+            <td class="left"></td>
+            <td class="right">
+              <div>Le &nbsp; / &nbsp; /</div>
+              <div style="margin-top:6mm;">Jacky Duquesne, expert.</div>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer">
+      <div><b>SARL Jacky Duquesne Expertises</b></div>
+      <div class="small">38 rue de la Paix 59490 SOMAIN</div>
+      <div class="small">« Le trait d’union entre l’assurance et son client »</div>
+      <div class="small">N° SIRET : 895032084 00017 / TVA FR 76895032084 / Code APE 6621Z</div>
+    </div>
+  </div>
+</body>
+</html>

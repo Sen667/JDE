@@ -1,0 +1,394 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Convention — Jacky Duquesne Expertises (J.D.E)</title>
+  <style>
+    /* =========================================================
+       PDF-generator compatible (wkhtmltopdf friendly)
+       - No flexbox / grid
+       - Table-based header + signature blocks
+       - Strong borders for the Barème table
+    ========================================================= */
+
+    @page{ size:A4; margin:12mm; }
+
+    html,body{ height:100%; }
+    body{
+      margin:0;
+      color:#111;
+      font-family: "Times New Roman", Times, serif;
+      font-size:11pt;
+      line-height:1.22;
+      background:#fff;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    .page{
+      width:210mm;
+      min-height:297mm;
+      margin:0 auto;
+      background:#e9efd9;        /* page tint like the original */
+      padding:12mm;             /* internal padding instead of flex spacing */
+      box-sizing:border-box;
+      position:relative;
+    }
+
+    /* ---------- Top header layout (table-based) ---------- */
+    .top-layout{
+      width:100%;
+      border-collapse:collapse;
+      margin:0 0 6mm 0;
+    }
+    .top-layout td{ vertical-align:top; }
+
+    .left-col{ width:120mm; padding-right:8mm; }
+    .right-col{ width:58mm; }
+
+    table{ width:100%; border-collapse:collapse; }
+
+    .info td{
+      border:1px solid #000;
+      padding:3.2mm 3.5mm;
+    }
+    .meta td{
+      border:1px solid #000;
+      padding:2.8mm 3mm;
+      white-space:nowrap;
+    }
+    .meta .right{ text-align:right; }
+
+    .logo-box{
+      border:1px solid #000;
+      padding:4mm 3.5mm;
+      text-align:center;
+      background:#ffffff; /* solid (avoid rgba) */
+      box-sizing:border-box;
+    }
+    .logo-box .jde{ font-size:14pt; font-weight:bold; letter-spacing:.5mm; }
+    .logo-box .small{ font-size:10pt; color:#444; }
+
+    p{ margin:2.2mm 0; }
+    .center{ text-align:center; }
+    .small{ font-size:10pt; color:#444; }
+
+    /* ---------- Check lines (table-based, no flex) ---------- */
+    .check-table{
+      width:100%;
+      border-collapse:collapse;
+      margin:2mm 0;
+    }
+    .check-table td{ vertical-align:top; }
+    .check-cell{
+      width:6mm;
+      padding-top:1.2mm;
+    }
+    .checkbox{
+      width:3.2mm; height:3.2mm;
+      border:1px solid #000;
+      display:inline-block;
+      background:#fff;
+    }
+
+    /* ---------- Barème (force visible grid) ---------- */
+    h2{ margin:5mm 0 2.5mm 0; font-size:12pt; font-weight:bold; }
+
+    .bareme{
+      width:100%;
+      border-collapse:collapse;
+      border:1.2px solid #000;
+      background:#fff; /* solid for predictable printing */
+      margin-top:2mm;
+      page-break-inside:avoid;
+    }
+    .bareme th, .bareme td{
+      border:1px solid #000;
+      padding:1.8mm 2.2mm;
+      font-size:10.2pt;
+    }
+    .bareme th{
+      text-align:center;
+      font-weight:bold;
+    }
+    .right{ text-align:right; }
+    .nowrap{ white-space:nowrap; }
+
+    /* ---------- Signature (table-based) ---------- */
+    .sign{
+      width:100%;
+      border-collapse:collapse;
+      margin-top:5mm;
+      page-break-inside:avoid;
+    }
+    .sign td{ vertical-align:bottom; }
+    .sign .label{ padding-bottom:1.5mm; }
+    .line{
+      border-bottom:1px solid #000;
+      height:10mm;
+    }
+
+    .footer{
+      margin-top:4mm;
+      font-size:10pt;
+    }
+
+    .page-no{
+      position:absolute;
+      right:12mm;
+      bottom:10mm;
+      font-size:10pt;
+    }
+
+    /* Page 2 */
+    .page-break{ page-break-before:always; }
+    .detachable{
+      border-top:2px dashed #000;
+      margin-top:6mm;
+      padding-top:4mm;
+      page-break-inside:avoid;
+    }
+    .detachable h3{
+      font-size:12pt;
+      text-align:center;
+      text-decoration:underline;
+      margin:0 0 3mm 0;
+    }
+
+    .formline{
+      width:100%;
+      border-collapse:collapse;
+      margin:2.2mm 0;
+    }
+    .formline td{ vertical-align:bottom; }
+    .formline .lbl{ width:60mm; }
+    .formline .fill{
+      border-bottom:1px solid #000;
+      height:7mm;
+    }
+  </style>
+</head>
+<body>
+
+<!-- PAGE 1 -->
+<section class="page">
+
+  <table class="top-layout">
+    <tr>
+      <td class="left-col">
+        <table class="info">
+          <tr><td><b>Nom :</b> {{client_nom}}</td></tr>
+          <tr><td><b>Prénom :</b> {{client_prenom}}</td></tr>
+          <tr><td><b>Adresse client :</b> {{adresse_client}}</td></tr>
+          <tr><td><b>Adresse sinistre :</b> {{adresse_sinistre}}</td></tr>
+        </table>
+
+        <table class="meta" style="margin-top:4mm;">
+          <tr>
+            <td><b>Porteur du dossier :</b> Mr Duquesne Jacky </td>
+            <td class="right"><b>Dossier N°</b> <span class="nowrap">{{dossier_no}}</span></td>
+          </tr>
+        </table>
+      </td>
+
+      <td class="right-col">
+        <div class="logo-box">
+          <div class="jde">J.D.E</div>
+          <div style="margin-top:2mm;" class="small">[Logo]</div>
+          <div style="margin-top:2mm; font-size:10.5pt;">
+            <b>Jacky Duquesne Expertises</b><br/>
+            <span class="small">Expert en détection bâtiment</span><br/>
+            <span class="small">Le trait d’union entre l’assurance et son client.</span>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    Nous vous désignons, conformément aux dispositions de l’article 1710 du Code Civil, comme Experts, dans le cadre d’une expertise
+    contradictoire*, afin de procéder à une reconnaissance du sinistre d’en faire un rapport et / ou d’évaluer les dommages sur les
+    Bâtiments, Matériels, Mobiliers, Marchandises nous appartenant ou nous étant confiés à un titre quelquonque suite au sinistre survenu
+    le : {{sinistre_date}}
+  </p>
+
+  <table class="check-table">
+    <tr>
+      <td class="check-cell"><span class="checkbox"></span></td>
+      <td>
+        <b>Vos honoraires HT</b> seront calculés sur le montant des dommages estimés consécutifs au sinistre ci-dessus visé, d’après
+        le tarif ci après actualisable au dernier indice connu au jour du sinistre par l’application de l’indice de la Fédération
+        Française du bâtiment.
+      </td>
+    </tr>
+  </table>
+
+  <p class="center"><b>Ou</b></p>
+
+  <table class="check-table">
+    <tr>
+      <td class="check-cell"><span class="checkbox"></span></td>
+      <td>
+        <b>Vos honoraires de 6 % du dommage</b>, en ajoutant la (tva de 20% applicable), avec un montant minimum de <b>2 500€ HT</b>
+        et hors procédure judiciaire, seront calculés après accord définitif du dossier de chiffrages par la compagnie d’assurance
+        sur le montant du dommage total ttc.
+      </td>
+    </tr>
+  </table>
+
+  <table class="check-table">
+    <tr>
+      <td class="check-cell"><span class="checkbox"></span></td>
+      <td>
+        Vos honoraires de _________ TTC comprennent : la visite de reconnaissance du lieux sinistré, le rapport d’expertise, le
+        rendez vous d’expertise avec les différents intervenants. ( en cas de chiffrage demandé, cochez la case correspondante ci-dessus au calcul des honoraires).
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    La mission sera exécutée dans un délai de deux ans à compter de l’expiration du délai de rétractation, sauf cas de procédure judiciaire ou d’actes
+    interruptifs de la prescription biennale régie par les articles L 114.1 et L114.2 du Code des Assurances.
+  </p>
+
+  <h2 class="center">Barème</h2>
+
+  <table class="bareme">
+    <thead>
+      <tr>
+        <th style="width:26%;">Tranche</th>
+        <th style="width:14%;">Montant</th>
+        <th style="width:12%;">Taux</th>
+        <th style="width:18%;">Jusqu'à</th>
+        <th style="width:30%;">Application</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr><td>Pertes jusqu'à</td><td class="right">24&nbsp;336&nbsp;€</td><td class="center">9%</td><td class="center">—</td><td class="center">—</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">24&nbsp;336&nbsp;€</td><td class="center">9% jusqu'à</td><td class="right">48&nbsp;671&nbsp;€</td><td>7&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">48&nbsp;671&nbsp;€</td><td class="center">8% jusqu'à</td><td class="right">97&nbsp;342&nbsp;€</td><td>6&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">97&nbsp;342&nbsp;€</td><td class="center">7% jusqu'à</td><td class="right">202&nbsp;795&nbsp;€</td><td>5&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">202&nbsp;795&nbsp;€</td><td class="center">6% jusqu'à</td><td class="right">405&nbsp;591&nbsp;€</td><td>3&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">405&nbsp;591&nbsp;€</td><td class="center">4,50% jusqu'à</td><td class="right">811&nbsp;181&nbsp;€</td><td>2,50&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">811&nbsp;181&nbsp;€</td><td class="center">3,50% jusqu'à</td><td class="right">2&nbsp;027&nbsp;953&nbsp;€</td><td>1,80&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">2&nbsp;027&nbsp;953&nbsp;€</td><td class="center">2,50% jusqu'à</td><td class="right">4&nbsp;055&nbsp;906&nbsp;€</td><td>1&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">4&nbsp;055&nbsp;906&nbsp;€</td><td class="center">1,75% jusqu'à</td><td class="right">8&nbsp;111&nbsp;813&nbsp;€</td><td>0,35&nbsp;% sur le supplément</td></tr>
+      <tr><td>Pertes supérieures à</td><td class="right">8&nbsp;111&nbsp;813&nbsp;€</td><td class="center">1,05% jusqu'à</td><td class="right">12&nbsp;540&nbsp;990&nbsp;€</td><td>0,30&nbsp;% sur le supplément</td></tr>
+      <tr><td>Frais dossier jusqu'à</td><td class="right">202&nbsp;795&nbsp;€</td><td class="center">120,00&nbsp;€</td><td class="center">—</td><td>€ TVA en sus</td></tr>
+    </tbody>
+  </table>
+
+  <p style="margin-top:3mm;">
+    Frais d’ouverture et de constitution de dossier : 120 € HT<br/>
+    Règlement à l’issue de la mission, au paiement du 1er acompte de l’indemnité réglé par la compagnie d’assurance, par chèque ou
+    délégation ou virement bancaire<br/>
+    Adresse de facturation : ☐ Adresse client &nbsp;&nbsp; ☐ Adresse sinistre<br/>
+    Le montant des sommes sera soumis à l’application des taxes en vigueur au jour du paiement.<br/>
+    Il nous a été laissé un exemplaire du présent document.<br/>
+    <i>* En cas d’expertise judiciaire, un avenant à cette convention devra être notifié afin de définir le pourcentage des honoraires complémentaires</i>
+  </p>
+
+  <table class="sign">
+    <tr>
+      <td style="width:33%;">
+        <div class="label">Fait à :</div>
+        <div class="line"></div>
+      </td>
+      <td style="width:33%; padding-left:6mm; padding-right:6mm;">
+        <div class="label">le :</div>
+        <div class="line"></div>
+      </td>
+      <td style="width:34%;">
+        <div class="label">Signature</div>
+        <div class="line"></div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="footer">
+    <p><b>Exemplaire Client</b></p>
+    <p>En cas d’annulation de commande : Loi 72-1137 du 22 décembre 1972 (voir au dos)</p>
+    <p>En cas de litige, seul le tribunal de Lille sera compétent.</p>
+    <p>Fait en 2 originaux dont 1 exemplaire est remis au client à la signature</p>
+
+    <div class="center" style="margin-top:4mm;">
+      <b>SARL Jacky Duquesne</b><br/>
+      <b>Expertises</b><br/>
+      38 rue de la Paix 59490 SOMAIN<br/>
+      <span class="small">N° SIRET : 895032084 00017 / TVA FR 76895032084 / Code APE 6621Z</span>
+    </div>
+  </div>
+
+  <div class="page-no">1/2</div>
+</section>
+
+<!-- PAGE 2 -->
+<section class="page page-break">
+
+  <h2 style="margin-top:0;">Extrait du code de la consommation relative à la protection des consommateurs en matière de démarchage et vente à domicile.</h2>
+  <p class="small">( livre 1er, titre 2, Chapitre 1er, section 3)</p>
+
+  <p><b>Art. L121-23 :</b> Les opérations visées à l’article L121-21 doivent faire l’objet d’un contrat dont un exemplaire doit être remis au client au moment de la conclusion de ce contrat et comporter, à peine de nullité, les mentions suivantes :</p>
+  <p>
+    1. Noms du fournisseur et du démarcheur<br/>
+    2. Adresse du fournisseur<br/>
+    3. Adresse du lieu de conclusion du contrat Désignation précise de la nature et des caractéristiques des biens offerts ou des services proposés : Expertises après sinistre évaluation chiffrage des dommages du batiment et de son sontenu<br/>
+    4. Conditions d’exécution du contrat, notamment les délais de livraisons des biens, ou d’exécution de la prestation de services ;<br/>
+    5. Prix global à payer et modalités de paiement ; en cas de vente à tempérament ou de vente à crédit, les formes exigées par la réglementation sur la vente à crédit, ainsi que le taux nominal de l’intêret et le taux effectif global de l’intêret déterminé dans les conditions prévues à l’article L313-1 ;<br/>
+    6. Faculté de renonciation prévue à l’article L121-25, ainsi que les conditions d’exercice de cette faculté et de façon apparente, le texte intégral des articles L121-23, L121-24, L121-25 et L121-26
+  </p>
+
+  <p><b>Art. L121-24 :</b> Le contrat visé à l’article L121-23 doit comprendre un formulaire détachable destiné à faciliter l’exercice de la faculté de renonciation dans les conditions prévues à l’article L121-25. Un décret pris en conseil d’Etat précisera les mentions devant figurer sur ce formulaire. Ce contrat ne peut comporter aucune clause attributive de compétence. Tous les exemplaires du contrat doivent être signés et datés de la main même du client.</p>
+
+  <p><b>Art. L121-25 :</b> Dans les sept jours, jours fériés compris, à compter de la commande ou de l’engagement d’achat, le client a la faculté d’y renoncer par lettre recommandée avec accusé réception. Si ce délai expire normalement un samedi, un dimanche ou un jour férié ou chômé, il est prorogé jusqu’au premier jour ouvrable suivant. Toute clause du contrat par laquelle le client abandonne son droit de renoncer à sa commande ou à son engagement d’achat est nulle et non avenue. Le présent article ne s’applique pas aux contrats conclus dans les conditions prévues à l’articles L121-27.</p>
+
+  <p><b>Art. L121-26 :</b> Avant l’expiration du délai de réflexion prévu à l’article L121-25, nul ne peut exiger ou obtenir du client, directement ou indirectement, à quelque titre ni sous quelque forme que ce soit une contrepartie quelquonque ni aucun engagement ni effectuer des prestations de services de quelque nature que ce soit. Toutefois, la souscription à domicile d’abonnement à une publication quotidienne et assimilée, au sens de l’article 39bis du code général des impôts, n’est pas soumise aux dispositions de l’alinéa précédent, dès lors que le consommateur dispose d’un droit de résiliation permanent, sans frais ni indemnité, assorti du remboursement, dans un délai de quinze jours, des sommes versées au prorata de la durée de l’abonnement restant à courir. En outre, les engagements ou ordres de paiement ne doivent pas être exécutés avant l’expiration du délai prévu à l’article L121-25 et doivent être retournés au consommateur dans les quinze jours qui suivent sa rétractation.</p>
+
+  <p>Fait en 2 originaux dont 1 exemplaire est remis au client à la signature</p>
+
+  <table class="sign" style="margin-top:3mm;">
+    <tr>
+      <td style="width:50%;">
+        <div class="label">Le à</div>
+        <div class="line"></div>
+      </td>
+      <td style="width:50%; padding-left:8mm;">
+        <div class="label">Signature</div>
+        <div class="line"></div>
+      </td>
+    </tr>
+  </table>
+
+  <div class="detachable">
+    <h3>BON DE RETRACTATION DETACHABLE</h3>
+    <p class="center"><b>ANNULATION DE LA COMMANDE</b> — code de la consommation articles L121-23 à L121-26</p>
+
+    <p><b>Conditions d’utilisation du bon de rétractation :</b><br/>
+      Compléter et signer ce formulaire ;<br/>
+      L’envoyer par lettre recommandée avec avis de réception<br/>
+      Utiliser l’adresse figurant sur la 1er page<br/>
+      L’expédier au plus tard le septième jour à partir du jour de la commande ou, si ce délai expire normalement un samedi, un dimanche ou un jour férié
+      ou chômé, le premier jour ouvrable suivant.
+    </p>
+
+    <p>je soussigné, déclare annuler la commande ci après :</p>
+
+    <table class="formline"><tr><td class="lbl">Nature du service commandé :</td><td class="fill"></td></tr></table>
+    <table class="formline"><tr><td class="lbl">Nom du Client :</td><td class="fill"> {{client_nom}} {{client_prenom}}</td></tr></table>
+    <table class="formline"><tr><td class="lbl">Adresse du Client :</td><td class="fill">{{adresse_client}}</td></tr></table>
+    <table class="formline"><tr><td class="lbl">signature du Client :</td><td class="fill"></td></tr></table>
+  </div>
+
+  <div class="center" style="margin-top:6mm;">
+    <b>SARL Jacky Duquesne</b><br/>
+    <b>Expertises</b><br/>
+    38 rue de la Paix 59490 SOMAIN<br/>
+    <span class="small">N° SIRET : 895032084 00017 / TVA FR 76895032084 / Code APE 6621Z</span>
+  </div>
+
+  <div class="page-no">2/2</div>
+</section>
+
+</body>
+</html>
