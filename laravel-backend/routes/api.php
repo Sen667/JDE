@@ -36,12 +36,16 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 // Authentication Routes - Exclude Sanctum middleware but still get /api prefix
 Route::withoutMiddleware([\Laravel\Sanctum\Http\Middleware\EnsureFrontendRequestsAreStateful::class])
-     ->prefix('auth')
-     ->group(function () {
-    Route::post('login', [AuthController::class, 'login']);
-    Route::post('register', [AuthController::class, 'register']);
-    Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
-});
+    ->prefix('auth')
+    ->group(function () {
+        Route::post('login', [AuthController::class, 'login']);
+        Route::post('register', [AuthController::class, 'register']);
+        Route::post('logout', [AuthController::class, 'logout'])->middleware('auth:sanctum');
+    });
+
+// Transcription Route
+Route::post('/transcribe', [App\Http\Controllers\AudioController::class, 'transcribe']);
+Route::post('/speeches', [App\Http\Controllers\AudioController::class, 'store']);
 
 // Temporary debug route to test user context loading
 Route::middleware(['auth:sanctum'])->get('/debug-user-context', function (Request $request) {

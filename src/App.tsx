@@ -21,6 +21,7 @@ import Profile from "./pages/Profile";
 import NotFound from "./pages/NotFound";
 import DossierDetail from "./pages/DossierDetail";
 import ClientsManagement from "./pages/ClientsManagement";
+import Speetch from "./pages/Speetch";
 import { useAuth } from "./hooks/useAuth";
 import { ThemeProvider } from "./components/ThemeProvider";
 import { PageTransition } from "./components/PageTransition";
@@ -36,7 +37,7 @@ const AuthBootstrap = () => {
 
 const AnimatedRoutes = () => {
   const location = useLocation();
-  
+
   return (
     <AnimatePresence mode="wait">
       <Routes location={location} key={location.pathname}>
@@ -57,6 +58,7 @@ const AnimatedRoutes = () => {
         <Route path="/jdmo/dossiers/:id" element={<DashboardLayout><PageTransition><DossierDetail /></PageTransition></DashboardLayout>} />
         <Route path="/dbcs/dossiers" element={<DashboardLayout><PageTransition><DossiersDBCS /></PageTransition></DashboardLayout>} />
         <Route path="/dbcs/dossiers/:id" element={<DashboardLayout><PageTransition><DossierDetail /></PageTransition></DashboardLayout>} />
+        <Route path="/speetch" element={<DashboardLayout><PageTransition><Speetch /></PageTransition></DashboardLayout>} />
         <Route path=":worldCode/dossiers" element={<DashboardLayout><PageTransition><Dossiers /></PageTransition></DashboardLayout>} />
         {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
         <Route path="*" element={<PageTransition><NotFound /></PageTransition>} />
@@ -71,7 +73,7 @@ const App = () => (
       <TooltipProvider>
         <Toaster />
         <Sonner />
-        <BrowserRouter basename="/multi-world-hub">
+        <BrowserRouter>
           <AuthBootstrap />
           <AnimatedRoutes />
         </BrowserRouter>

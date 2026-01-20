@@ -1,0 +1,25 @@
+services:
+    mysql:
+        image: 'mysql:8.0'
+        ports:
+            - '3307:3306'
+        environment:
+            MYSQL_ROOT_PASSWORD: 'password'
+            MYSQL_ROOT_HOST: "%"
+            MYSQL_DATABASE: 'jde_database'
+        volumes:
+            - 'mysql-data:/var/lib/mysql'
+        networks:
+            - sail
+        healthcheck:
+            test: [ "CMD", "mysqladmin", "ping", "-ppassword" ]
+            retries: 3
+            timeout: 5s
+
+networks:
+    sail:
+        driver: bridge
+
+volumes:
+    mysql-data:
+        driver: local

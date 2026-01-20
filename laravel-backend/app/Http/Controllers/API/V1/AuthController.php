@@ -113,6 +113,7 @@ class AuthController extends Controller
 
     public function register(Request $request)
     {
+        \Log::info('Register attempt', $request->all());
         $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|email|unique:users',

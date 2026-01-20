@@ -54,8 +54,9 @@ class Dossier extends Model
         $prefix = 'DOS-' . $year . '-';
 
         // Find the highest existing reference for this year
+        // Compatible with SQLite and MySQL
         $lastReference = static::where('reference', 'like', $prefix . '%')
-            ->orderByRaw('CAST(SUBSTRING_INDEX(reference, "-", -1) AS UNSIGNED) DESC')
+            ->orderBy('reference', 'desc')
             ->value('reference');
 
         if ($lastReference) {
@@ -124,7 +125,7 @@ class Dossier extends Model
     public function tasks(): HasMany
     {
         return $this->hasManyThrough(Task::class, WorkflowStep::class, 'workflow_template_id', 'workflow_step_id')
-            ->whereIn('workflow_steps.id', function($query) {
+            ->whereIn('workflow_steps.id', function ($query) {
                 $query->select('workflow_step_id')
                     ->from('dossier_workflow_progress')
                     ->where('dossier_id', $this->id);
@@ -161,9 +162,11 @@ class Dossier extends Model
     {
         $template = $this->world->workflowTemplates()
             ->where('is_active', true)
-            ->with(['steps' => function ($query) {
-                $query->orderBy('step_number');
-            }])
+            ->with([
+                'steps' => function ($query) {
+                    $query->orderBy('step_number');
+                }
+            ])
             ->first();
 
         if (!$template) {
@@ -200,9 +203,11 @@ class Dossier extends Model
     {
         $template = $this->world->workflowTemplates()
             ->where('is_active', true)
-            ->with(['steps' => function ($query) {
-                $query->orderBy('step_number');
-            }])
+            ->with([
+                'steps' => function ($query) {
+                    $query->orderBy('step_number');
+                }
+            ])
             ->first();
 
         return [

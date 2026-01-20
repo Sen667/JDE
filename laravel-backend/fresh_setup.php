@@ -15,7 +15,7 @@ echo shell_exec('cd ' . __DIR__ . ' && php artisan db:seed');
 echo "\nVerifying workflow steps...\n";
 require_once 'bootstrap/app.php';
 
-$jdeSteps = \App\Models\WorkflowStep::whereHas('template', function($q) {
+$jdeSteps = \App\Models\WorkflowStep::whereHas('template', function ($q) {
     $q->where('world_id', 1)->where('is_active', true);
 })->orderBy('step_number')->get();
 
@@ -32,7 +32,8 @@ if ($firstStep) {
     $fields = json_decode($firstStep->form_fields, true);
     echo "\nParsed fields:\n";
     foreach ($fields as $field) {
-        echo "  - {$field['name']} ({$field['type']}) {$field['required'] ? '[required]' : '[optional]'}\n";
+        $req = $field['required'] ? '[required]' : '[optional]';
+        echo "  - {$field['name']} ({$field['type']}) $req\n";
     }
 }
 

@@ -10,7 +10,7 @@ export const api = axios.create({
     'Content-Type': 'application/json',
     'Accept': 'application/json',
   },
-  timeout: 10000,
+  timeout: 60000,
   // Ensure form data is properly serialized
   transformRequest: [(data, headers) => {
     // Debug: log what we're sending
@@ -522,7 +522,7 @@ export const roleAPI = {
     return response.data;
   },
 
-  createRole: async (data: { name: string; display_name?: string}) => {
+  createRole: async (data: { name: string; display_name?: string }) => {
     const response = await api.post('/admin/roles', data);
     return response.data;
   },
